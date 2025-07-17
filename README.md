@@ -15,11 +15,10 @@ This is a simple note-taking web app built using Python with the Flask web frame
 
 # Installation and Setup
   Prerequisites
-
-    1. AWS EC2 instance running with a RHEL or Ubuntu-based OS.
-    2. Python 3.x installed.
-    3. MariaDB installed and running.
-    4. AWS CLI for managing resources (optional but recommended).
+1. AWS EC2 instance running with a RHEL or Ubuntu-based OS.
+2. Python 3.x installed.
+3. MariaDB installed and running.
+4. AWS CLI for managing resources (optional but recommended).
 
 1. Clone this repository
 
