@@ -4,95 +4,85 @@ This is a simple note-taking web app built using Python with the Flask web frame
 
 # Features
 
-    Write and save notes: Users can add notes and they are saved in the database with a timestamp.
+    1. Write and save notes: Users can add notes and they are saved in the database with a timestamp.
+    2. Display saved notes: Saved notes are displayed in descending order based on their creation time.
+    3. Backup: Automated database backups to a dedicated EBS volume for data persistence.
 
-    Display saved notes: Saved notes are displayed in descending order based on their creation time.
+## Technologies Used
 
-    Backup: Automated database backups to a dedicated EBS volume for data persistence.
+    1. Frontend: HTML, CSS (responsive design)
+    2. Backend: Flask (Python 3)
+    3. Database: MariaDB
+    4. Deployment: AWS EC2, EBS
 
-Technologies Used
+# Installation and Setup
+  Prerequisites
 
-    Frontend: HTML, CSS (responsive design)
-
-    Backend: Flask (Python 3)
-
-    Database: MariaDB
-
-    Deployment: AWS EC2, EBS
-
-Installation and Setup
-Prerequisites
-
-    AWS EC2 instance running with a RHEL or Ubuntu-based OS.
-
-    Python 3.x installed.
-
-    MariaDB installed and running.
-
-    AWS CLI for managing resources (optional but recommended).
+    1. AWS EC2 instance running with a RHEL or Ubuntu-based OS.
+    2. Python 3.x installed.
+    3. MariaDB installed and running.
+    4. AWS CLI for managing resources (optional but recommended).
 
 1. Clone this repository
 
-git clone https://github.com/yourusername/note_taking.git
-cd note_taking
+    git clone https://github.com/yourusername/note_taking.git
+    cd note_taking
 
-2. Install Dependencies
+3. Install Dependencies
 
 Install Flask and other required Python packages:
 
-pip3 install flask
-pip3 install mysql-connector-python
+    pip3 install flask
+    pip3 install mysql-connector-python
 
 3. Configure MariaDB
 
 Make sure MariaDB is running and create a new database and user for the app:
 
-sudo mysql -u root -p
+    sudo mysql -u root -p
 
 Then, run the following SQL commands:
 
-CREATE DATABASE notesdb;
-CREATE USER 'noteuser'@'localhost' IDENTIFIED BY 'notepass';
-GRANT ALL PRIVILEGES ON notesdb.* TO 'noteuser'@'localhost';
-FLUSH PRIVILEGES;
+    CREATE DATABASE notesdb;
+    CREATE USER 'noteuser'@'localhost' IDENTIFIED BY 'notepass';
+    GRANT ALL PRIVILEGES ON notesdb.* TO 'noteuser'@'localhost';
+    FLUSH PRIVILEGES;
 
 4. Setup the Database
 
 The app uses a notes table to store notes. Connect to your MariaDB instance and create the table:
 
-sudo mysql -u noteuser -p
+    sudo mysql -u noteuser -p
 
 Run the following SQL:
 
-USE notesdb;
-CREATE TABLE notes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    content TEXT,
-    timestamp DATETIME
-);
+    USE notesdb;
+    CREATE TABLE notes (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        content TEXT,
+        timestamp DATETIME
+    );
 
 5. Update the Flask Application
 
 In the app.py file, make sure you update the MariaDB connection details (if necessary):
 
-db = mysql.connector.connect(
-    host="localhost",
-    user="noteuser",
-    password="notepass",
-    database="notesdb"
-)
+    db = mysql.connector.connect(
+        host="localhost",
+        user="noteuser",
+        password="notepass",
+        database="notesdb"
+    )
 
 6. Run the Application
 
 You can now start the Flask app by running:
 
-sudo python3 app.py
+    sudo python3 app.py
 
 The app should be accessible at your EC2 instance's public IP.
 
-Open your browser and go to:
-
-http://<your-ec2-public-ip>
+Open your browser and go to:  http://<your-ec2-public-ip>
 
 You should be able to write and save notes!
 Automated Backup to EBS Volume
@@ -102,9 +92,8 @@ Create Backup Script
 
 The script /backup/db-backup.sh is used to back up the MariaDB database:
 
-#!/bin/bash
-mysqldump -u noteuser -pnotepass notesdb > /backup/notesdb_$(date +%F_%T).sql
-
+    #!/bin/bash
+    mysqldump -u noteuser -pnotepass notesdb > /backup/notesdb_$(date +%F_%T).sql
 
 3. Monitor Backups
 
