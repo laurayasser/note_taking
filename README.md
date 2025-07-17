@@ -3,10 +3,9 @@
 This is a simple note-taking web app built using Python with the Flask web framework and backed by MariaDB for persistent data storage. The app allows users to write, save, and display notes along with timestamps.
 
 # Features
-
-    1. Write and save notes: Users can add notes and they are saved in the database with a timestamp.
-    2. Display saved notes: Saved notes are displayed in descending order based on their creation time.
-    3. Backup: Automated database backups to a dedicated EBS volume for data persistence.
+ 1. Write and save notes: Users can add notes and they are saved in the database with a timestamp.
+ 2. Display saved notes: Saved notes are displayed in descending order based on their creation time.
+ 3. Backup: Automated database backups to a dedicated EBS volume for data persistence.
 
 ## Technologies Used
 
