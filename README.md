@@ -11,7 +11,7 @@ This is a simple note-taking web app built using Python with the Flask web frame
 1. Frontend: HTML, CSS (responsive design)
 2. Backend: Flask (Python 3)
 3. Database: MariaDB
-4. Deployment: AWS EC2, EBS
+4. Deployment: AWS EC2
 
 ## Installation and Setup
   Prerequisites
